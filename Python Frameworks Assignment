@@ -1,0 +1,60 @@
+# Import libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load dataset
+df = pd.read_csv("your_dataset.csv")
+
+# Explore dataset
+print(df.head())
+print(df.info())
+print(df.isnull().sum())
+
+# Convert publish_time to year
+df['year'] = pd.to_datetime(df['publish_time']).dt.year
+
+# Simple visualization: Publications by year
+year_counts = df['year'].value_counts().sort_index()
+plt.figure(figsize=(8,5))
+plt.bar(year_counts.index, year_counts.values, color='skyblue', edgecolor='black')
+plt.title('Publications by Year')
+plt.xlabel('Year')
+plt.ylabel('Number of Publications')
+plt.show()
+
+# Additional visualizations can be added here
+
+# streamlit_app.py
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+
+st.title("Publications Analysis 📊")
+
+# Load dataset
+df = pd.read_csv("your_dataset.csv")
+
+# Data overview
+st.subheader("Dataset Preview")
+st.dataframe(df.head())
+
+st.subheader("Dataset Info")
+buffer = df.info()
+st.text(buffer)
+
+st.subheader("Missing Values")
+st.write(df.isnull().sum())
+
+# Convert publish_time to year
+df['year'] = pd.to_datetime(df['publish_time']).dt.year
+
+# Plot publications by year
+year_counts = df['year'].value_counts().sort_index()
+st.subheader("Publications by Year")
+fig, ax = plt.subplots()
+ax.bar(year_counts.index, year_counts.values, color='skyblue', edgecolor='black')
+ax.set_xlabel("Year")
+ax.set_ylabel("Number of Publications")
+st.pyplot(fig)
+oh
