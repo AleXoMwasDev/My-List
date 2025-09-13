@@ -1,0 +1,49 @@
+"""
+Smartphone Class Example 📱
+---------------------------
+Demonstrates:
+- Class attributes and methods
+- Constructors (__init__)
+- Inheritance
+- Encapsulation
+"""
+
+# Base class
+class Smartphone:
+    def __init__(self, brand, model, battery_life):
+        self.brand = brand
+        self.model = model
+        self.battery_life = battery_life  # in hours
+    
+    def call(self, number):
+        print(f"{self.brand} {self.model} is calling {number} 📞")
+    
+    def charge(self):
+        print(f"{self.brand} {self.model} is charging... 🔋")
+
+# Derived class (inheritance)
+class AdvancedSmartphone(Smartphone):
+    def __init__(self, brand, model, battery_life, camera_quality):
+        super().__init__(brand, model, battery_life)
+        self.camera_quality = camera_quality  # in megapixels
+    
+    def take_photo(self):
+        print(f"{self.brand} {self.model} takes a {self.camera_quality}MP photo 📸")
+    
+    # Encapsulation example: battery usage
+    def use_battery(self, hours):
+        if hours > self.battery_life:
+            print("Battery dead! ⚡ Please charge.")
+        else:
+            self.battery_life -= hours
+            print(f"Used {hours} hours. Remaining: {self.battery_life}h 🔋")
+
+
+if __name__ == "__main__":
+    phone1 = Smartphone("Nokia", "3310", 24)
+    phone1.call("123456789")
+    phone1.charge()
+
+    phone2 = AdvancedSmartphone("Apple", "iPhone 15", 20, 48)
+    phone2.take_photo()
+    phone2.use_battery(5)
