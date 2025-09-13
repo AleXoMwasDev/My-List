@@ -1,0 +1,37 @@
+"""
+File Read & Write Challenge 🖋️
+Error Handling Lab 🧪
+----------------------------------
+This program asks the user for a filename, reads its content,
+handles errors if the file doesn't exist, and writes a modified
+version to a new file.
+"""
+
+def process_file(input_filename, output_filename):
+    try:
+        # Open and read the file
+        with open(input_filename, "r") as f:
+            content = f.read()
+        
+        # Modify the content (example: convert to uppercase)
+        modified_content = content.upper()
+
+        # Write to a new file
+        with open(output_filename, "w") as f:
+            f.write(modified_content)
+        
+        print(f"✅ File processed successfully! Modified content saved in '{output_filename}'")
+
+    except FileNotFoundError:
+        print(f"❌ Error: The file '{input_filename}' was not found.")
+    except PermissionError:
+        print(f"⚠️ Error: You don’t have permission to read '{input_filename}'.")
+    except Exception as e:
+        print(f"⚡ Unexpected error: {e}")
+
+
+# Main program
+if __name__ == "__main__":
+    filename = input("Enter the filename to read: ")
+    new_filename = "modified_" + filename
+    process_file(filename, new_filename)
