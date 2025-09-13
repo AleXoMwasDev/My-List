@@ -1,0 +1,177 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "f7bf151d",
+   "metadata": {},
+   "source": [
+    "# 📊 Data Analysis & Visualization with Pandas, Matplotlib & Seaborn\n",
+    "This notebook demonstrates how to:\n",
+    "- Load and explore a dataset\n",
+    "- Perform basic data analysis\n",
+    "- Visualize data with different chart types\n",
+    "\n",
+    "We will use the **Iris dataset**."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e81e1c32",
+   "metadata": {},
+   "source": [
+    "## 🔹 Task 1: Load and Explore the Dataset"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "cb2b82a2",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "\n",
+    "import pandas as pd\n",
+    "import seaborn as sns\n",
+    "import matplotlib.pyplot as plt\n",
+    "from sklearn.datasets import load_iris\n",
+    "\n",
+    "# Load Iris dataset from sklearn\n",
+    "iris = load_iris(as_frame=True)\n",
+    "df = iris.frame  # Convert to pandas DataFrame\n",
+    "\n",
+    "# Display first few rows\n",
+    "print(\"First 5 rows of the dataset:\")\n",
+    "display(df.head())\n",
+    "\n",
+    "# Check structure\n",
+    "print(\"Dataset Info:\")\n",
+    "print(df.info())\n",
+    "\n",
+    "# Check for missing values\n",
+    "print(\"Missing Values:\")\n",
+    "print(df.isnull().sum())\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "75f9cffa",
+   "metadata": {},
+   "source": [
+    "## 🔹 Task 2: Basic Data Analysis"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "7555c446",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "\n",
+    "# Statistical summary\n",
+    "print(\"Statistical Summary:\")\n",
+    "display(df.describe())\n",
+    "\n",
+    "# Group by species and calculate mean of numerical columns\n",
+    "group_means = df.groupby(\"target\").mean()\n",
+    "print(\"Mean values grouped by species:\")\n",
+    "display(group_means)\n",
+    "\n",
+    "# Observation\n",
+    "print(\"Observation: Sepal length tends to increase from setosa → versicolor → virginica.\")\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "309d9245",
+   "metadata": {},
+   "source": [
+    "## 🔹 Task 3: Data Visualization"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "672c9452",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "\n",
+    "plt.figure(figsize=(8,5))\n",
+    "plt.plot(df.index, df[\"sepal length (cm)\"], label=\"Sepal Length\")\n",
+    "plt.plot(df.index, df[\"sepal width (cm)\"], label=\"Sepal Width\")\n",
+    "plt.title(\"Sepal Length & Width over Index\")\n",
+    "plt.xlabel(\"Index\")\n",
+    "plt.ylabel(\"Length (cm)\")\n",
+    "plt.legend()\n",
+    "plt.show()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "c708fca7",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "\n",
+    "plt.figure(figsize=(6,4))\n",
+    "sns.barplot(x=\"target\", y=\"petal length (cm)\", data=df, ci=None)\n",
+    "plt.title(\"Average Petal Length per Species\")\n",
+    "plt.xlabel(\"Species (0=setosa, 1=versicolor, 2=virginica)\")\n",
+    "plt.ylabel(\"Average Petal Length (cm)\")\n",
+    "plt.show()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "fca1c51e",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "\n",
+    "plt.figure(figsize=(6,4))\n",
+    "plt.hist(df[\"sepal length (cm)\"], bins=15, color=\"skyblue\", edgecolor=\"black\")\n",
+    "plt.title(\"Distribution of Sepal Length\")\n",
+    "plt.xlabel(\"Sepal Length (cm)\")\n",
+    "plt.ylabel(\"Frequency\")\n",
+    "plt.show()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "ea2b6f72",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "\n",
+    "plt.figure(figsize=(6,4))\n",
+    "sns.scatterplot(x=\"sepal length (cm)\", y=\"petal length (cm)\", hue=\"target\", data=df, palette=\"deep\")\n",
+    "plt.title(\"Sepal Length vs Petal Length by Species\")\n",
+    "plt.xlabel(\"Sepal Length (cm)\")\n",
+    "plt.ylabel(\"Petal Length (cm)\")\n",
+    "plt.legend(title=\"Species\")\n",
+    "plt.show()\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7c79af81",
+   "metadata": {},
+   "source": [
+    "## ✅ Conclusion\n",
+    "We successfully:\n",
+    "- Loaded and explored the Iris dataset\n",
+    "- Performed descriptive statistics and grouping\n",
+    "- Created line, bar, histogram, and scatter plots\n",
+    "\n",
+    "This workflow can be applied to other datasets for analysis and visualization."
+   ]
+  }
+ ],
+ "metadata": {},
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
